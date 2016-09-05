@@ -4277,7 +4277,11 @@ function parse_si(x, opts) {
 		z.r = x;
 		z.t = utf8read(unescapexml(x.match(sitregex).join("").replace(tagregex,"")));
 		if(html) z.h = parse_rs(x);
-	}
+	}else{
+          z.r = x;
+          z.t = utf8read(unescapexml(x.substr(x.indexOf(">") + 1).split(/<\/t>/)[0]));
+          // console.log(x);
+        }
 	/* 18.4.3 phoneticPr CT_PhoneticPr (TODO: needed for Asian support) */
 	/* 18.4.6 rPh CT_PhoneticRun (TODO: needed for Asian support) */
 	return z;
