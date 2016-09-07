@@ -4278,9 +4278,11 @@ function parse_si(x, opts) {
 		z.t = utf8read(unescapexml(x.match(sitregex).join("").replace(tagregex,"")));
 		if(html) z.h = parse_rs(x);
 	}else{
-          z.r = x;
-          z.t = utf8read(unescapexml(x.substr(x.indexOf(">") + 1).split(/<\/t>/)[0]));
-          // console.log(x);
+		//Если файл форматированный, то вначале могут быть пробелы и знаки конца строки
+		//поэтому так
+		z.r = x;
+		z.t = utf8read(unescapexml(x.substr(x.indexOf(">") + 1).split(/<\/t>/)[0]));
+		if(html) z.h = z.t;
         }
 	/* 18.4.3 phoneticPr CT_PhoneticPr (TODO: needed for Asian support) */
 	/* 18.4.6 rPh CT_PhoneticRun (TODO: needed for Asian support) */
